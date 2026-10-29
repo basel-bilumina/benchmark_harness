@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "harness"
+version = "0.1.0"
+description = "Minimal terminal agent runtime and harness built on litellm"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "litellm>=1.50",
+    "mcp>=1.0",  # litellm imports it whenever `tools` are passed but doesn't declare it
+    "rich>=13.7",
+    "prompt_toolkit>=3.0.40",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[project.scripts]
+harness = "harness.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["harness*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
